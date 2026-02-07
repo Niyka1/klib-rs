@@ -39,3 +39,19 @@ let hook = match Hook::set_hook(target_function as _, my_random_hook as *const (
     Err(e) => todo!(),
 };
 ```
+
+
+### Kernel Global Allocator
+
+`klib-rs` provides a built-in **global allocator** designed for Windows kernel-mode Rust development.
+
+It can be used as the crate-wide global allocator and removes the need to implement a custom allocation backend in each project.
+
+Example:
+
+```rust
+use klib_rs::kalloc::KernelAllocator;
+
+#[global_allocator]
+static GLOBAL_ALLOCATOR: KernelAllocator = KernelAllocator;
+```
